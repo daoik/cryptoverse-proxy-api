@@ -1,8 +1,9 @@
 import { createRouter } from "next-connect";
 import { fetchCryptoData } from "@/services/coinGeckoService";
+import { corsMiddleware } from "@/middleware/cors";
 
 const router = createRouter();
-
+router.use(corsMiddleware);
 router.get(async (req, res) => {
   try {
     fetchCryptoData(req.query.per_page, req.query.page).then((data) =>

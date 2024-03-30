@@ -1,8 +1,9 @@
 import { searchCoins } from "@/services/coinGeckoService";
 import { createRouter } from "next-connect";
+import { corsMiddleware } from "@/middleware/cors";
 
 const router = createRouter();
-
+router.use(corsMiddleware);
 router.get(async (req, res) => {
   try {
     searchCoins(req.query.query).then((data) => res.json(data));
